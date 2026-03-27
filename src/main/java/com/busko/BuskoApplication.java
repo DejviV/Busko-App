@@ -1,0 +1,13 @@
+package com.busko;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class BuskoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(BuskoApplication.class, args);
+    }
+
+}
