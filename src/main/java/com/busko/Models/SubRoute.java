@@ -13,16 +13,14 @@ public class SubRoute {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String ID;
     private String RouteID;
-    private String CompanyID;
     private String StartingPoint;
     private String EndPoint;
     private double Price;
 
     public SubRoute() {}
 
-    public SubRoute(String routeID, String companyID, String startingPoint, String endPoint, double price) {
+    public SubRoute(String routeID, String startingPoint, String endPoint, double price) {
         this.RouteID = routeID;
-        this.CompanyID = companyID;
         this.StartingPoint = startingPoint;
         this.EndPoint = endPoint;
         this.Price = price;

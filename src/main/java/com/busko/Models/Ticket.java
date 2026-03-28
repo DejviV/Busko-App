@@ -1,4 +1,4 @@
-package com.busko.Models.Enums;
+package com.busko.Models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

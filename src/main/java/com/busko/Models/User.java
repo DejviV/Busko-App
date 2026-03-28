@@ -1,7 +1,6 @@
 package com.busko.Models;
 
 import com.busko.Models.Enums.Roles;
-import com.busko.Models.Enums.Ticket;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,39 +21,37 @@ public class User {
     private Roles Role;
     @Nullable
     private String Description = null;
-    private List<Ticket> tickets;
     @Nullable
     private String CompanyID = null;
     @Nullable
-    private String ProfileImage = null;
+    private String CompanyProfileImage = null;
+    private List<Ticket> tickets;
 
     public User() {}
 
+    //Inspector & driver
+    public User(String nameAndSurname, String username, String password, Roles role, String CompanyID) {
+        this.NameAndSurname = nameAndSurname;
+        this.Username = username;
+        this.Password = password;
+        this.Role = role;
+        this.CompanyID = CompanyID;
+    }
+
+    //Company
+    public User(String nameAndSurname, String username, String password, Roles role, String Description, String ProfileImage) {
+        this.NameAndSurname = nameAndSurname;
+        this.Username = username;
+        this.Password = password;
+        this.Role = role;
+        this.Description = Description;
+        this.CompanyProfileImage = ProfileImage;
+    }
+    //Traveler
     public User(String nameAndSurname, String username, String password, Roles role) {
         this.NameAndSurname = nameAndSurname;
         this.Username = username;
         this.Password = password;
         this.Role = role;
-    }
-
-    public User(String nameAndSurname, String username, String password, Roles role, String description, List<Ticket> tickets, String companyID) {
-        this.NameAndSurname = nameAndSurname;
-        this.Username = username;
-        this.Password = password;
-        this.Role = role;
-        this.Description = description;
-        this.tickets = tickets;
-        this.CompanyID = companyID;
-    }
-
-    public User(String nameAndSurname, String username, String password, Roles role, String description, List<Ticket> tickets, String companyID, String profileImage) {
-        this.NameAndSurname = nameAndSurname;
-        this.Username = username;
-        this.Password = password;
-        this.Role = role;
-        this.Description = description;
-        this.tickets = tickets;
-        this.CompanyID = companyID;
-        this.ProfileImage = profileImage;
     }
 }
