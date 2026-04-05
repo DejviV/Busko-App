@@ -1,9 +1,9 @@
 package com.busko.Repository;
 
-import com.busko.Models.Route;
-import org.springframework.data.repository.CrudRepository;
+import com.busko.Models.TimedRoute;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TimedRouteRepository extends CrudRepository<Route, String> {
+public interface TimedRouteRepository extends JpaRepository<TimedRoute, Long> {
 }

@@ -5,32 +5,34 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
+import org.springframework.lang.Nullable;
 
 @Data
 @Entity
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String ID;
-    private String SubRouteID;
-    private String UserID;
-    private boolean ReturnTicket;
-    private boolean IsScanned;
-    private String NumberOREmail;
-    private String SeatNumber;
-    private String DateTime;
-    private String ValidDateTime;
+    private Long id;
+    private Long subRouteId;
+    private String userId = null;
+    private boolean returnTicket;
+    private boolean isScanned;
+    @Nullable
+    private String numberOREmail = null;
+    private String seatNumber;
+    private String dateTime;
+    private String validDateTime;
 
     public Ticket() {}
 
-    public Ticket(String subRouteID, String userID, boolean returnTicket, boolean isScanned, String numberOREmail, String seatNumber, String dateTime, String validDateTime) {
-        this.SubRouteID = subRouteID;
-        this.UserID = userID;
-        this.ReturnTicket = returnTicket;
-        this.IsScanned = isScanned;
-        this.NumberOREmail = numberOREmail;
-        this.SeatNumber = seatNumber;
-        this.DateTime = dateTime;
-        this.ValidDateTime = validDateTime;
+    public Ticket(Long subRouteID, String userID, boolean returnTicket, boolean isScanned, String numberOREmail, String seatNumber, String dateTime, String validDateTime) {
+        this.subRouteId = subRouteID;
+        this.userId = userID;
+        this.returnTicket = returnTicket;
+        this.isScanned = isScanned;
+        this.numberOREmail = numberOREmail;
+        this.seatNumber = seatNumber;
+        this.dateTime = dateTime;
+        this.validDateTime = validDateTime;
     }
 }

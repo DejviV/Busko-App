@@ -1,9 +1,6 @@
 package com.busko.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -11,19 +8,22 @@ import lombok.Data;
 public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID;
-    private Long CompanyID;
-    private String StartingPoint;
-    private String EndPoint;
-    private int NumSeats;
+    private Long id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private User company;
+    private String startingPoint;
+    private String endPoint;
+    private int numSeats;
 
 
     public Route() {}
 
-    public Route(Long companyID, String startingPoint, String endPoint, int numSeats) {
-        this.CompanyID = companyID;
-        this.StartingPoint = startingPoint;
-        this.EndPoint = endPoint;
-        this.NumSeats = numSeats;
+    public Route(User company, String startingPoint, String endPoint, int numSeats) {
+        this.company = company;
+        this.startingPoint = startingPoint;
+        this.endPoint = endPoint;
+        this.numSeats = numSeats;
+
     }
 }

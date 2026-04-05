@@ -11,12 +11,12 @@ import lombok.Data;
 public class BusStop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String ID;
-    private String Name;
+    private Long id;
+    private String name;
 
     public BusStop() {}
 
     public BusStop(String name) {
-        this.Name = name;
+        this.name = name;
     }
 }

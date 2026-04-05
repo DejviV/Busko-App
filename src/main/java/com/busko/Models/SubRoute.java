@@ -1,9 +1,6 @@
 package com.busko.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -11,18 +8,20 @@ import lombok.Data;
 public class SubRoute {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String ID;
-    private String RouteID;
-    private String StartingPoint;
-    private String EndPoint;
-    private double Price;
+    private Long id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "route_id")
+    private Route route;
+    private String startingPoint;
+    private String endPoint;
+    private double price;
 
     public SubRoute() {}
 
-    public SubRoute(String routeID, String startingPoint, String endPoint, double price) {
-        this.RouteID = routeID;
-        this.StartingPoint = startingPoint;
-        this.EndPoint = endPoint;
-        this.Price = price;
+    public SubRoute(Route route, String startingPoint, String endPoint, double price) {
+        this.route = route;
+        this.startingPoint = startingPoint;
+        this.endPoint = endPoint;
+        this.price = price;
     }
 }
