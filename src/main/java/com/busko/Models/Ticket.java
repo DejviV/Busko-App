@@ -36,11 +36,11 @@ public class Ticket {
     private boolean isScannedReturn;
 
     @Column(nullable = true)
-    private String contactInfo; // email or phone for guests
+    private String contactInfo; // email or phone for non-logged in users
 
     private int seatNumber;
-    private LocalDate travelDate;      // the date the user chose
-    private LocalDateTime validUntil;  // when the ticket expires
+    private LocalDate travelDate;
+    private LocalDateTime validUntil;
 
     // registered user
     public static Ticket createForUser(TimedRoute timedRoute, SubRoute subRoute, User user,

@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface SubRouteService {
     List<SubRoute> getAllSubRoutes();
     Optional<SubRoute> getSubRouteById(Long id);
-    SubRoute createSubRoute(SubRoute subRoute);
+    SubRoute createSubRoute(Long routeId, SubRoute subRoute);
     Optional<SubRoute> updateSubRoute(Long id, SubRoute subRoute);
     Optional<SubRoute> deleteSubRoute(Long id);
 

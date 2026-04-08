@@ -1,6 +1,8 @@
 package com.busko.Services.Domain.impl;
 
+import com.busko.Models.Route;
 import com.busko.Models.TimedRoute;
+import com.busko.Repository.RouteRepository;
 import com.busko.Repository.TimedRouteRepository;
 import com.busko.Services.Domain.TimedRouteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +15,12 @@ import java.util.Optional;
 public class TimedRouteServiceImpl implements TimedRouteService {
 
     private final TimedRouteRepository timedRouteRepository;
+    private final RouteRepository routeRepository;
 
-    @Autowired
-    public TimedRouteServiceImpl(TimedRouteRepository timedRouteRepository) {
+
+    public TimedRouteServiceImpl(TimedRouteRepository timedRouteRepository, RouteRepository routeRepository) {
         this.timedRouteRepository = timedRouteRepository;
+        this.routeRepository = routeRepository;
     }
 
     @Override
@@ -30,7 +34,9 @@ public class TimedRouteServiceImpl implements TimedRouteService {
     }
 
     @Override
-    public TimedRoute createTimedRoute(TimedRoute timedRoute) {
+    public TimedRoute createTimedRoute(Long routeId, TimedRoute timedRoute) {
+        Route route = routeRepository.findById(routeId).get();
+        timedRoute.setRoute(route);
         return timedRouteRepository.save(timedRoute);
     }
 
@@ -40,8 +46,7 @@ public class TimedRouteServiceImpl implements TimedRouteService {
             existingTimedRoute.setStartTime(timedRoute.getStartTime());
             existingTimedRoute.setEndTime(timedRoute.getEndTime());
             existingTimedRoute.setDay(timedRoute.getDay());
-            existingTimedRoute.setDate(timedRoute.getDate());
-            existingTimedRoute.setNumSeats(timedRoute.getNumSeats());
+            existingTimedRoute.setNumSeatsRemaining(timedRoute.getNumSeatsRemaining());
             return existingTimedRoute;
         });
     }
@@ -52,4 +57,7 @@ public class TimedRouteServiceImpl implements TimedRouteService {
         timedRoute.ifPresent(timedRouteRepository::delete);
         return timedRoute;
     }
+
+
+
 }
