@@ -1,38 +1,82 @@
 package com.busko.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.lang.Nullable;
 
-@Data
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long subRouteId;
-    private String userId = null;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "timed_route_id")
+    private TimedRoute timedRoute;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sub_route_id")
+    private SubRoute subRoute;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = true)
+    private User user; // null if guest
+
     private boolean returnTicket;
-    private boolean isScanned;
-    @Nullable
-    private String numberOREmail = null;
-    private String seatNumber;
-    private String dateTime;
-    private String validDateTime;
+    private boolean isScannedOutbound;
+    private boolean isScannedReturn;
 
-    public Ticket() {}
+    @Column(nullable = true)
+    private String contactInfo; // email or phone for guests
 
-    public Ticket(Long subRouteID, String userID, boolean returnTicket, boolean isScanned, String numberOREmail, String seatNumber, String dateTime, String validDateTime) {
-        this.subRouteId = subRouteID;
-        this.userId = userID;
-        this.returnTicket = returnTicket;
-        this.isScanned = isScanned;
-        this.numberOREmail = numberOREmail;
-        this.seatNumber = seatNumber;
-        this.dateTime = dateTime;
-        this.validDateTime = validDateTime;
+    private int seatNumber;
+    private LocalDate travelDate;      // the date the user chose
+    private LocalDateTime validUntil;  // when the ticket expires
+
+    // registered user
+    public static Ticket createForUser(TimedRoute timedRoute, SubRoute subRoute, User user,
+                                       boolean returnTicket, int seatNumber, LocalDate travelDate) {
+        Ticket t = new Ticket();
+        t.timedRoute = timedRoute;
+        t.subRoute = subRoute;
+        t.user = user;
+        t.contactInfo = null;
+        t.returnTicket = returnTicket;
+        t.seatNumber = seatNumber;
+        t.travelDate = travelDate;
+        t.validUntil = travelDate.plusDays(28).atStartOfDay();
+        t.isScannedOutbound = false;
+        t.isScannedReturn = false;
+        return t;
     }
+
+    // guest
+    public static Ticket createForGuest(TimedRoute timedRoute, SubRoute subRoute, String contactInfo,
+                                        boolean returnTicket, int seatNumber, LocalDate travelDate) {
+        Ticket t = new Ticket();
+        t.timedRoute = timedRoute;
+        t.subRoute = subRoute;
+        t.user = null;
+        t.contactInfo = contactInfo;
+        t.returnTicket = returnTicket;
+        t.seatNumber = seatNumber;
+        t.travelDate = travelDate;
+        t.validUntil = travelDate.plusDays(28).atStartOfDay();
+        t.isScannedOutbound = false;
+        t.isScannedReturn = false;
+        return t;
+    }
+
 }
+
+
+

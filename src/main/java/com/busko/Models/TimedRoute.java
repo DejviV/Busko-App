@@ -1,31 +1,35 @@
 package com.busko.Models;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class TimedRoute {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-    @ManyToOne
-    @JoinColumn (name = "route_id")
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "route_id")
     private Route route;
-    private String startTime;
-    private String endTime;
-    private String day;
-    private String date;
-    private int numSeats;
 
-    public TimedRoute() {}
+    private LocalTime startTime;
+    private LocalTime endTime;
+    private DayOfWeek day;
+    private int numSeatsRemaining;
 
-    public TimedRoute(Route Route, String startTime, String endTime, String day, String date, int numSeats) {
-        this.route = Route;
+    public TimedRoute(Route route, LocalTime startTime, LocalTime endTime, DayOfWeek day) {
+        this.route = route;
         this.startTime = startTime;
         this.endTime = endTime;
         this.day = day;
-        this.date = date;
-        this.numSeats = numSeats;
     }
 }

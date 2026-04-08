@@ -3,6 +3,9 @@ package com.busko.Models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Entity
 public class Route {
@@ -15,6 +18,11 @@ public class Route {
     private String startingPoint;
     private String endPoint;
     private int numSeats;
+
+    @OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
+    private List<SubRoute> subRoutes = new ArrayList<>();
+    @OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
+    private List<TimedRoute> timedRoutes = new ArrayList<>();
 
 
     public Route() {}

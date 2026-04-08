@@ -3,6 +3,8 @@ package com.busko.Models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @Entity
 public class SubRoute {
@@ -14,11 +16,11 @@ public class SubRoute {
     private Route route;
     private String startingPoint;
     private String endPoint;
-    private double price;
+    private BigDecimal price;
 
     public SubRoute() {}
 
-    public SubRoute(Route route, String startingPoint, String endPoint, double price) {
+    public SubRoute(Route route, String startingPoint, String endPoint, BigDecimal price) {
         this.route = route;
         this.startingPoint = startingPoint;
         this.endPoint = endPoint;
