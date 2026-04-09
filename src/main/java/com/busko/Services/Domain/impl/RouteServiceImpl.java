@@ -37,7 +37,6 @@ public class RouteServiceImpl implements RouteService {
             existingRoute.setNumSeats(route.getNumSeats());
             return routeRepository.save(existingRoute);
         });
-
     }
 
     @Override

@@ -25,17 +25,17 @@ public class TimedRoute {
     private LocalTime endTime;
     private DayOfWeek day;
     private int numSeatsRemaining;
+    private int numSeats;
 
-    public TimedRoute(Route route, LocalTime startTime, LocalTime endTime, DayOfWeek day,  int numSeatsRemaining) {
+    public TimedRoute(Route route, LocalTime startTime, LocalTime endTime, DayOfWeek day) {
         this.route = route;
         this.startTime = startTime;
         this.endTime = endTime;
         this.day = day;
-        this.numSeatsRemaining = numSeatsRemaining;
+        this.numSeatsRemaining = route.getNumSeats();
+        this.numSeats = route.getNumSeats();
     }
     public void decreaseNumSeatsRemaining() {
-        if (numSeatsRemaining > 0) {
             numSeatsRemaining--;
-        }
     }
 }

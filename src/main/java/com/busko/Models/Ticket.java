@@ -59,6 +59,7 @@ public class Ticket {
         return t;
     }
 
+
     // guest
     public static Ticket createForGuest(TimedRoute timedRoute, SubRoute subRoute, String contactInfo,
                                         boolean returnTicket, int seatNumber, LocalDate travelDate) {
@@ -75,7 +76,6 @@ public class Ticket {
         t.isScannedReturn = false;
         return t;
     }
-
 }
 
 
