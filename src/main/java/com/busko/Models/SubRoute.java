@@ -8,10 +8,10 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
+@Entity
 public class SubRoute {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,12 +19,14 @@ public class SubRoute {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "route_id")
     private Route route;
-    private String startingPoint;
-    private String endPoint;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private BusStop startingPoint;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private BusStop endPoint;
     private BigDecimal price;
 
 
-    public SubRoute(Route route, String startingPoint, String endPoint, BigDecimal price) {
+    public SubRoute(Route route, BusStop startingPoint, BusStop endPoint, BigDecimal price) {
         this.route = route;
         this.startingPoint = startingPoint;
         this.endPoint = endPoint;
@@ -32,6 +34,6 @@ public class SubRoute {
 
     }
     public String getName() {
-        return startingPoint +  " - " + endPoint;
+        return startingPoint.getName() +  " - " + endPoint.getName();
     }
 }
