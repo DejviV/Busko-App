@@ -39,7 +39,9 @@ public class Ticket {
     private String contactInfo; // email or phone for non-logged in users
 
     private int seatNumber;
+    @Column(nullable = false)
     private LocalDate travelDate;
+    @Column(nullable = false)
     private LocalDateTime validUntil;
 
     // registered user
@@ -53,8 +55,11 @@ public class Ticket {
         t.returnTicket = returnTicket;
         t.seatNumber = seatNumber;
         t.travelDate = travelDate;
-        t.validUntil = travelDate.plusDays(28).atStartOfDay();
-        t.isScannedOutbound = false;
+        if(returnTicket) {
+            t.validUntil = travelDate.plusDays(28).atStartOfDay();
+        } else {
+            t.validUntil = travelDate.atTime(23, 59);
+        }        t.isScannedOutbound = false;
         t.isScannedReturn = false;
         return t;
     }
@@ -71,7 +76,11 @@ public class Ticket {
         t.returnTicket = returnTicket;
         t.seatNumber = seatNumber;
         t.travelDate = travelDate;
-        t.validUntil = travelDate.plusDays(28).atStartOfDay();
+        if(returnTicket) {
+            t.validUntil = travelDate.plusDays(28).atStartOfDay();
+        } else {
+            t.validUntil = travelDate.atTime(23, 59);
+        }
         t.isScannedOutbound = false;
         t.isScannedReturn = false;
         return t;

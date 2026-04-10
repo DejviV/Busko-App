@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.DayOfWeek;
+import java.time.Duration;
 import java.time.LocalTime;
 
 @Entity
@@ -35,7 +36,13 @@ public class TimedRoute {
         this.numSeatsRemaining = route.getNumSeats();
         this.numSeats = route.getNumSeats();
     }
+
     public void decreaseNumSeatsRemaining() {
             numSeatsRemaining--;
+    }
+
+    public long getApproximateTravelTime() {
+        Duration duration = Duration.between(startTime, endTime);
+        return duration.toMinutes();
     }
 }

@@ -29,5 +29,9 @@ public class SubRoute {
         this.startingPoint = startingPoint;
         this.endPoint = endPoint;
         this.price = price;
+
+    }
+    public String getName() {
+        return startingPoint +  " - " + endPoint;
     }
 }

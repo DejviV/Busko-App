@@ -34,4 +34,7 @@ public class Route {
         this.numSeats = numSeats;
 
     }
+    public String getName() {
+        return startingPoint +  " - " + endPoint;
+    }
 }

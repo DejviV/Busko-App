@@ -1,4 +1,4 @@
-package com.busko.Models.DTOs.GuestTicket;
+package com.busko.Models.DTOs.Ticket.GuestTicket;
 
 import com.busko.Models.SubRoute;
 import com.busko.Models.Ticket;
