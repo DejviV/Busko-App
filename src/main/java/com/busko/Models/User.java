@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.lang.Nullable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -25,14 +27,13 @@ public class User {
     private Roles role;
     @Nullable
     private String description = null;
-    @Nullable
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id", nullable = true)
     private User company;
     @Nullable
     private String companyProfileImage = null;
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Ticket> tickets;
+    private List<Ticket> tickets = new ArrayList<>();
 
 
     public static User createTraveler(String nameAndSurname, String username, String password) {

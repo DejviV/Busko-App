@@ -1,11 +1,9 @@
 package com.busko.Models;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.lang.Nullable;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -30,15 +28,15 @@ public class Ticket {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = true)
     private User user; // null if guest
+    @Column(nullable = true)
+    private String contactInfo; // email or phone for non-logged in users
 
     private boolean returnTicket;
     private boolean isScannedOutbound;
     private boolean isScannedReturn;
-
-    @Column(nullable = true)
-    private String contactInfo; // email or phone for non-logged in users
-
     private int seatNumber;
+
+
     @Column(nullable = false)
     private LocalDate travelDate;
     @Column(nullable = false)
